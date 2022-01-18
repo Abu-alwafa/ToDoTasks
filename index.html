@@ -67,6 +67,10 @@
             for (let i = 0; i < localStorage.length; i++) {
                 tasksArr.push(localStorage.getItem(i));
                 addTask(tasksArr[i], i);
+                Tasks.children[i].style.background = "#3f8755";
+                Tasks.children[i].children[0].style.textDecoration = 'line-through';
+                Tasks.children[i].children[0].style.color = 'white';
+                Tasks.children[i].children[1].children[0].remove();
             }
         }
         // submiting Event
@@ -98,6 +102,7 @@
         // done button function
         function doneTask(param) {
             // param.parentElement.previousElementSibling.children[0].style.background = 'lightgreen';
+            param.children[0].remove();
             param.parentElement.parentElement.style.background = "#3f8755";
             param.parentElement.parentElement.style.color = "white";
             param.parentElement.previousElementSibling.children[0].style.textDecoration = 'line-through';
