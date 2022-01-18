@@ -54,72 +54,7 @@
         <div dir="rtl" class="feild tasks" style="padding: 20px;"></div>
     </div>
 
-    <script>
-        // Elements Decleration
-        const Input = document.querySelector('form input[type=text]');
-        const Submit = document.querySelector('form input[type=submit]');
-        const Tasks = document.querySelector('.tasks');
-        const clearBtn = document.querySelector('form button[type=button]');
-        // define an array for contain Tasks   
-        let tasksArr = [];
-        // check if localstorage have items 
-        if (localStorage.length !== 0) {
-            for (let i = 0; i < localStorage.length; i++) {
-                tasksArr.push(localStorage.getItem(i));
-                addTask(tasksArr[i], i);
-                Tasks.children[i].style.background = "#3f8755";
-                Tasks.children[i].children[0].style.textDecoration = 'line-through';
-                Tasks.children[i].children[0].style.color = 'white';
-                Tasks.children[i].children[1].children[0].remove();
-            }
-        }
-        // submiting Event
-        Submit.addEventListener('click', function (e) {
-            e.preventDefault();
-            if (Input.value != "") {
-                // pushing new value to tasks array
-                tasksArr.push(Input.value);
-                let lastTask = tasksArr.length - 1; // last task index 
-                // add new task to tasks area
-                addTask(tasksArr[lastTask], lastTask);
-                // set new task to localstorage
-                localStorage.setItem(lastTask, Input.value);
-            }
-            // empty Input feild
-            Input.value = "";
-        });
-        // drow new task in tasks area
-        function addTask(param, index) {
-            Tasks.innerHTML += `
-            <div style="width: 100%;" class="row">
-                <div class="col-12 col-md-10"><p>${param}</p></div>
-                <div class="col-12 col-md-2 offset-10 offset-md-0"><button onclick="doneTask(this)" class="bg-success"><i class="fas fa-check-square"></i></button>
-                    <button onclick="deleteTask(this)" class="bg-danger" data-index="${index}"><i class="fas fa-trash-alt"></i></button>
-                </div>
-            </div>
-            `;
-        }
-        // done button function
-        function doneTask(param) {
-            // param.parentElement.previousElementSibling.children[0].style.background = 'lightgreen';
-            param.children[0].remove();
-            param.parentElement.parentElement.style.background = "#3f8755";
-            param.parentElement.parentElement.style.color = "white";
-            param.parentElement.previousElementSibling.children[0].style.textDecoration = 'line-through';
-        }
-        // delete button function
-        function deleteTask(param) {
-            param.parentNode.parentElement.remove();
-            localStorage.removeItem(param.dataset.index);
-        }
-        clearBtn.onclick = function () {
-            tasksArr.length = 0;
-            localStorage.clear();
-            Tasks.remove();
-            location.reload();
-        }
-		// localStorage.clear();
-    </script>
+    <script src="main.js"></script>
 </body>
 
 </html>
